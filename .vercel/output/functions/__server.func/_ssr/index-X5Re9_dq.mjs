@@ -1,0 +1,1355 @@
+import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
+import { V as VscVscode, S as SiIntellijidea, a as SiRstudioide, b as SiPostman, c as SiGithub, d as SiDocker, e as SiMongodb, f as SiMysql, g as SiSpringboot, h as SiExpress, i as SiNodedotjs, j as SiReact, k as SiKotlin, l as SiPhp, m as SiCplusplus, n as SiC, o as SiJavascript, F as FaJava, p as SiR, q as SiPython } from "../_libs/react-icons.mjs";
+import { A as AnimatePresence, m as motion, u as useScroll, a as useSpring } from "../_libs/framer-motion.mjs";
+import { S as Sun, M as Moon, X, a as Menu, A as ArrowRight, D as Download, b as Mail, C as ChartColumn, c as ChartLine, B as Brain, d as Database, T as TrendingUp, e as CodeXml, f as Smartphone, g as MapPin, h as Briefcase, G as GraduationCap, i as BookOpen, L as Laptop, j as Award, F as Funnel, k as ChartPie, l as Layers, W as Wrench, m as ArrowUpRight, n as Calendar, U as Users, E as ExternalLink, o as Check, p as Copy, q as LoaderCircle, r as Send, P as Phone } from "../_libs/lucide-react.mjs";
+import "../_libs/motion-dom.mjs";
+import "../_libs/motion-utils.mjs";
+const links = [
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+  { id: "certifications", label: "Certifications" },
+  { id: "contact", label: "Contact" }
+];
+function Navbar() {
+  const [open, setOpen] = reactExports.useState(false);
+  const [scrolled, setScrolled] = reactExports.useState(false);
+  const [active, setActive] = reactExports.useState("hero");
+  const [theme, setTheme] = reactExports.useState(
+    () => typeof window !== "undefined" && localStorage.getItem("theme") || "dark"
+  );
+  reactExports.useEffect(() => {
+    const root = document.documentElement;
+    root.classList.remove("light", "dark");
+    root.classList.add(theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+  reactExports.useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 16);
+      for (const l of links) {
+        const el = document.getElementById(l.id);
+        if (!el) continue;
+        const r = el.getBoundingClientRect();
+        if (r.top <= 140 && r.bottom >= 140) {
+          setActive(l.id);
+          break;
+        }
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const go = (id) => {
+    setOpen(false);
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    motion.header,
+    {
+      initial: { y: -32, opacity: 0 },
+      animate: { y: 0, opacity: 1 },
+      transition: { duration: 0.6 },
+      className: "fixed inset-x-0 top-0 z-50 px-4 py-3",
+      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `flex items-center justify-between rounded-2xl px-4 py-3 transition-all ${scrolled ? "glass-strong" : "border border-transparent"}`, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { onClick: () => go("hero"), className: "group flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid size-9 place-items-center rounded-lg border border-primary/40 bg-primary/10 font-display text-sm font-bold text-primary shadow-[0_0_20px_rgba(0,240,255,0.35)] transition-all group-hover:bg-primary/20", children: "KE" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "hidden font-display text-sm font-semibold tracking-wide sm:inline", children: "Kavishka Edirisinghe" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "hidden items-center gap-1 lg:flex", children: links.map((l) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "button",
+            {
+              onClick: () => go(l.id),
+              className: `relative rounded-full px-3 py-1.5 text-sm transition-colors ${active === l.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`,
+              children: [
+                l.label,
+                active === l.id && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  motion.span,
+                  {
+                    layoutId: "nav-active",
+                    className: "absolute inset-0 -z-10 rounded-full border border-primary/40 bg-primary/15",
+                    transition: { type: "spring", stiffness: 380, damping: 30 }
+                  }
+                )
+              ]
+            },
+            l.id
+          )) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                onClick: () => setTheme(theme === "dark" ? "light" : "dark"),
+                "aria-label": "Toggle theme",
+                className: "rounded-full p-2 text-muted-foreground hover:bg-primary/10 hover:text-foreground transition-colors",
+                children: theme === "dark" ? /* @__PURE__ */ jsxRuntimeExports.jsx(Sun, { className: "size-5" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Moon, { className: "size-5" })
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                onClick: () => setOpen((v) => !v),
+                "aria-label": "Toggle menu",
+                className: "rounded-full p-2 text-muted-foreground hover:bg-primary/10 hover:text-foreground lg:hidden",
+                children: open ? /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "size-5" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Menu, { className: "size-5" })
+              }
+            )
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: open && /* @__PURE__ */ jsxRuntimeExports.jsx(
+          motion.div,
+          {
+            initial: { opacity: 0, y: -10 },
+            animate: { opacity: 1, y: 0 },
+            exit: { opacity: 0, y: -10 },
+            className: "glass-strong mt-2 overflow-hidden rounded-2xl p-2 lg:hidden",
+            children: links.map((l) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                onClick: () => go(l.id),
+                className: `block w-full rounded-xl px-4 py-3 text-left text-sm ${active === l.id ? "bg-primary/15 text-foreground" : "text-muted-foreground"}`,
+                children: l.label
+              },
+              l.id
+            ))
+          }
+        ) })
+      ] })
+    }
+  );
+}
+const profileImg = "/assets/Profile-DnW4fJsM.png";
+function Hero() {
+  const [scrollY, setScrollY] = reactExports.useState(0);
+  reactExports.useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "hero", className: "relative flex min-h-screen items-center px-4 pt-28 lg:pt-24", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-2", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      motion.div,
+      {
+        initial: { opacity: 0, y: 30 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.8 },
+        style: { transform: `translateY(${scrollY * 0.05}px)` },
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "relative flex size-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-75" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "relative inline-flex size-2 rounded-full bg-primary" })
+            ] }),
+            "Available for new opportunities"
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "block text-2xl font-medium text-muted-foreground sm:text-3xl lg:text-4xl", children: "Hi, I'm" }),
+            "Kavishka",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-gradient", children: "Edirisinghe" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-lg font-medium text-primary", children: "Data Science Undergraduate" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-xl text-xl text-foreground/90", children: "Transforming Data Into Actionable Insights." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground", children: "Motivated Data Science undergraduate with strong foundations in analytics, statistics, business intelligence, and software development. Passionate about turning complex datasets into meaningful solutions." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-8 flex flex-wrap gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "a",
+              {
+                href: "#projects",
+                className: "group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:shadow-[0_0_30px_rgba(0,240,255,0.6)]",
+                children: [
+                  "View Projects",
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "size-4 transition-transform group-hover:translate-x-1" })
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "a",
+              {
+                href: "/cv/Kavishka_Edirisinghe.pdf",
+                download: "Kavishka_Edirisinghe.pdf",
+                className: "inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/5 px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-primary/10",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(Download, { className: "size-4" }),
+                  "Download CV"
+                ]
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-10 flex items-center gap-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "a",
+              {
+                href: "https://github.com/kavishlakmal",
+                target: "_blank",
+                rel: "noopener noreferrer",
+                className: "flex size-11 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary transition-all hover:bg-primary/20 hover:shadow-[0_0_20px_rgba(0,240,255,0.4)]",
+                "aria-label": "GitHub",
+                children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "size-5", viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z" }) })
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "a",
+              {
+                href: "https://www.linkedin.com/in/kavishlakmal",
+                target: "_blank",
+                rel: "noopener noreferrer",
+                className: "flex size-11 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary transition-all hover:bg-primary/20 hover:shadow-[0_0_20px_rgba(0,240,255,0.4)]",
+                "aria-label": "LinkedIn",
+                children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "size-5", viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" }) })
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "a",
+              {
+                href: "mailto:kavishka.l.edirisinghe@gmail.com",
+                className: "flex size-11 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary transition-all hover:bg-primary/20 hover:shadow-[0_0_20px_rgba(0,240,255,0.4)]",
+                "aria-label": "Email",
+                children: /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "size-5" })
+              }
+            )
+          ] })
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      motion.div,
+      {
+        initial: { opacity: 0, scale: 0.95 },
+        animate: { opacity: 1, scale: 1 },
+        transition: { duration: 1, delay: 0.2 },
+        className: "relative flex items-center justify-center aspect-square w-full",
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.div,
+            {
+              animate: { rotate: 360 },
+              transition: { duration: 24, repeat: Infinity, ease: "linear" },
+              className: "absolute size-[88%] rounded-full border border-dashed border-primary/30"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.div,
+            {
+              animate: { scale: [1, 1.06, 1], opacity: [0.4, 0.15, 0.4] },
+              transition: { duration: 3.5, repeat: Infinity, ease: "easeInOut" },
+              className: "absolute size-[76%] rounded-full border border-primary/50 shadow-[0_0_40px_rgba(0,240,255,0.15)]"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.div,
+            {
+              animate: { y: [0, -14, 0] },
+              transition: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+              className: "relative size-[68%] rounded-full overflow-hidden ring-4 ring-primary/60 shadow-[0_0_70px_rgba(0,240,255,0.35)]",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "img",
+                {
+                  src: profileImg,
+                  alt: "Kavishka Edirisinghe",
+                  className: "size-full object-cover object-top"
+                }
+              )
+            }
+          )
+        ]
+      }
+    )
+  ] }) });
+}
+function Section({
+  id,
+  eyebrow,
+  title,
+  subtitle,
+  children
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id, className: "relative py-24 sm:py-32", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl px-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      motion.div,
+      {
+        initial: { opacity: 0, y: 30 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-80px" },
+        transition: { duration: 0.6 },
+        className: "mx-auto mb-14 max-w-2xl text-center",
+        children: [
+          eyebrow && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs uppercase tracking-wider text-secondary", children: eyebrow }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-4 text-4xl font-bold tracking-tight sm:text-5xl", children: title.split(" ").map(
+            (w, i, arr) => i === arr.length - 1 ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-gradient", children: w }, i) : /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+              w,
+              " "
+            ] }, i)
+          ) }),
+          subtitle && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-muted-foreground", children: subtitle })
+        ]
+      }
+    ),
+    children
+  ] }) });
+}
+const skills = [
+  { icon: ChartColumn, label: "Data Analysis" },
+  { icon: ChartLine, label: "Statistical Analysis" },
+  { icon: Brain, label: "Business Intelligence" },
+  { icon: Database, label: "Data Warehousing" },
+  { icon: TrendingUp, label: "Predictive Modeling" },
+  { icon: CodeXml, label: "Full-Stack Development" },
+  { icon: Smartphone, label: "Android Development" }
+];
+const info = [
+  { icon: MapPin, label: "Location", value: "Kadawatha, Gampaha District" }
+];
+const internshipRoles = [
+  "Data Science",
+  "Data Analytics",
+  "Business Intelligence",
+  "Artificial Intelligence",
+  "Machine Learning",
+  "Data Engineering",
+  "Database Administration"
+];
+const EDUCATION = [
+  {
+    icon: GraduationCap,
+    period: "2023 — Present",
+    title: "BSc (Hons) in IT — Specializing in Data Science",
+    sub: "",
+    org: "Sri Lanka Institute of Information Technology (SLIIT)",
+    detail: "CGPA: 3.76"
+  },
+  {
+    icon: BookOpen,
+    period: "2019 — 2022",
+    title: "G.C.E Advanced Level (Physical Sciences)",
+    sub: "",
+    org: "D.S. Senanayake College, Colombo 07",
+    detail: "Physics: C · Combined Mathematics: C · Chemistry: S"
+  },
+  {
+    icon: Laptop,
+    period: "2018 - 2019",
+    title: "Diploma in Information Technology",
+    sub: "",
+    org: "ESOFT Metro Campus",
+    detail: "Information Technology"
+  },
+  {
+    icon: Award,
+    period: "2013 — 2018",
+    title: "G.C.E Ordinary Level",
+    sub: "",
+    org: "Asoka College, Colombo 10",
+    detail: "9 A Passes"
+  }
+];
+function About() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Section, { id: "about", eyebrow: "About", title: "Building the future with data", subtitle: "Data-driven thinker. Engineer at heart.", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid items-stretch gap-12 lg:grid-cols-2", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      motion.div,
+      {
+        initial: { opacity: 0, x: -30 },
+        whileInView: { opacity: 1, x: 0 },
+        viewport: { once: true },
+        transition: { duration: 0.7 },
+        className: "flex flex-col",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass-strong rounded-3xl p-7 flex flex-col flex-1", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base leading-relaxed text-muted-foreground", children: "I'm a Data Science undergraduate at SLIIT, passionate about transforming raw data into clear, actionable insights. My focus spans analytics, statistics, predictive modelling, and business intelligence, bridging engineering rigor with storytelling." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-base leading-relaxed text-muted-foreground", children: "From ETL pipelines and warehouse design to full-stack platforms and predictive regression, I love shipping end-to-end solutions that make data useful." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-6 flex flex-wrap gap-2", children: skills.map((s) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-3 py-1.5 text-xs", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(s.icon, { className: "size-3.5 text-primary" }),
+            s.label
+          ] }, s.label)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-auto pt-8 space-y-3", children: [
+            info.map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              motion.div,
+              {
+                initial: { opacity: 0, x: -20 },
+                whileInView: { opacity: 1, x: 0 },
+                viewport: { once: true },
+                transition: { duration: 0.5, delay: i * 0.1 },
+                className: "flex items-center gap-5 glass rounded-2xl px-6 py-5",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex size-12 shrink-0 items-center justify-center rounded-xl border border-primary/30 bg-primary/10 text-primary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(item.icon, { className: "size-5" }) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-[10px] uppercase tracking-widest text-muted-foreground", children: item.label }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-0.5 text-base font-medium", children: item.value })
+                  ] })
+                ]
+              },
+              item.label
+            )),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              motion.div,
+              {
+                initial: { opacity: 0, x: -20 },
+                whileInView: { opacity: 1, x: 0 },
+                viewport: { once: true },
+                transition: { duration: 0.5, delay: 0.15 },
+                className: "flex items-start gap-5 glass rounded-2xl px-6 py-5",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex size-12 shrink-0 items-center justify-center rounded-xl border border-primary/30 bg-primary/10 text-primary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Briefcase, { className: "size-5" }) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-[10px] uppercase tracking-widest text-muted-foreground", children: "Seeking Internship In" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 flex flex-wrap gap-2", children: internshipRoles.map((role) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary", children: role }, role)) })
+                  ] })
+                ]
+              }
+            )
+          ] })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      motion.div,
+      {
+        initial: { opacity: 0, x: 30 },
+        whileInView: { opacity: 1, x: 0 },
+        viewport: { once: true },
+        transition: { duration: 0.7, delay: 0.15 },
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-[11px] uppercase tracking-[0.2em] text-primary", children: "Education" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-1 font-display text-xl font-semibold", children: "Academic Journey" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-4 top-2 bottom-2 w-px bg-gradient-to-b from-primary/60 via-primary/30 to-transparent sm:left-5" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-6", children: EDUCATION.map((t, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              motion.div,
+              {
+                initial: { opacity: 0, y: 20 },
+                whileInView: { opacity: 1, y: 0 },
+                viewport: { once: true, margin: "-40px" },
+                transition: { duration: 0.55, delay: i * 0.12 },
+                className: "relative pl-14 sm:pl-16",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-0 top-0 grid size-9 place-items-center rounded-xl border border-primary/40 bg-background text-primary shadow-[0_0_20px_rgba(0,240,255,0.35)] sm:size-10", children: /* @__PURE__ */ jsxRuntimeExports.jsx(t.icon, { className: "size-4" }) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-2xl p-4 transition-all hover:border-primary/50 hover:shadow-[0_8px_30px_rgba(0,240,255,0.2)]", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-[10px] uppercase tracking-[0.2em] text-primary", children: t.period }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "mt-1 font-display text-base font-semibold leading-snug", children: t.title }),
+                    t.sub && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-0.5 text-sm text-foreground/80", children: t.sub }),
+                    t.org && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-0.5 text-xs text-muted-foreground", children: t.org }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 inline-block rounded-md border border-primary/20 bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary", children: t.detail })
+                  ] })
+                ]
+              },
+              i
+            )) })
+          ] })
+        ]
+      }
+    )
+  ] }) });
+}
+const SKILL_ICONS = {
+  "Python": SiPython,
+  "R": SiR,
+  "Java": FaJava,
+  "JavaScript": SiJavascript,
+  "C": SiC,
+  "C++": SiCplusplus,
+  "PHP": SiPhp,
+  "Kotlin": SiKotlin,
+  "React": SiReact,
+  "Node.js": SiNodedotjs,
+  "Express.js": SiExpress,
+  "Spring Boot": SiSpringboot,
+  "MySQL": SiMysql,
+  "MongoDB": SiMongodb,
+  "Docker": SiDocker,
+  "GitHub": SiGithub,
+  "Postman": SiPostman,
+  "RStudio": SiRstudioide,
+  "IntelliJ IDEA": SiIntellijidea,
+  "VS Code": VscVscode
+};
+const CATEGORIES = [
+  {
+    id: "programming",
+    icon: CodeXml,
+    title: "Programming Languages",
+    items: ["Python", "R", "Java", "JavaScript", "C", "C++", "PHP", "Kotlin"]
+  },
+  {
+    id: "datascience",
+    icon: ChartColumn,
+    title: "Data Science",
+    items: ["Data Analysis", "EDA", "Data Cleaning", "Predictive Modelling", "Regression Analysis", "Hypothesis Testing", "ANOVA"]
+  },
+  {
+    id: "bi",
+    icon: ChartPie,
+    title: "BI & Visualization",
+    items: ["Power BI", "DAX", "Dashboard Development", "Excel Analytics"]
+  },
+  {
+    id: "frameworks",
+    icon: Layers,
+    title: "Frameworks",
+    items: ["React", "Node.js", "Express.js", "Spring Boot"]
+  },
+  {
+    id: "databases",
+    icon: Database,
+    title: "Databases",
+    items: ["MySQL", "MongoDB", "Oracle"]
+  },
+  {
+    id: "tools",
+    icon: Wrench,
+    title: "Tools",
+    items: ["Docker", "GitHub", "Postman", "RStudio", "IntelliJ IDEA", "VS Code"]
+  }
+];
+function Skills() {
+  const [activeFilter, setActiveFilter] = reactExports.useState("all");
+  const getFilteredCategories = () => {
+    if (activeFilter === "all") {
+      return CATEGORIES;
+    }
+    return CATEGORIES.filter((cat) => cat.id === activeFilter);
+  };
+  const getActiveCategoryTitle = () => {
+    if (activeFilter === "all") return "All Skills";
+    return CATEGORIES.find((cat) => cat.id === activeFilter)?.title || "Skills";
+  };
+  const filterButtons = [
+    { id: "all", label: "All Skills", icon: Funnel },
+    ...CATEGORIES.map((cat) => ({ id: cat.id, label: cat.title, icon: cat.icon }))
+  ];
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Section, { id: "skills", eyebrow: "Skills", title: "A toolkit for modern data work", subtitle: "The stack I use to ship insights and software.", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      motion.div,
+      {
+        initial: { opacity: 0, y: 20 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true },
+        transition: { duration: 0.5 },
+        className: "mb-10 flex flex-wrap justify-center gap-2",
+        children: filterButtons.map((btn) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "button",
+          {
+            onClick: () => setActiveFilter(btn.id),
+            className: `inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${activeFilter === btn.id ? "bg-primary text-primary-foreground shadow-[0_0_20px_rgba(0,240,255,0.4)]" : "border border-primary/20 bg-primary/5 text-foreground/70 hover:bg-primary/10 hover:text-foreground"}`,
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(btn.icon, { className: "size-3.5" }),
+              btn.label,
+              activeFilter === btn.id && btn.id !== "all" && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "button",
+                {
+                  onClick: (e) => {
+                    e.stopPropagation();
+                    setActiveFilter("all");
+                  },
+                  className: "ml-1 rounded-full hover:bg-white/20 p-0.5",
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "size-3" })
+                }
+              )
+            ]
+          },
+          btn.id
+        ))
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      motion.div,
+      {
+        initial: { opacity: 0, y: -10 },
+        animate: { opacity: 1, y: 0 },
+        className: "mb-6 text-center",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-block rounded-full bg-primary/10 px-3 py-1 text-xs text-primary", children: [
+          "Showing: ",
+          getActiveCategoryTitle()
+        ] })
+      },
+      activeFilter
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-5 sm:grid-cols-2 lg:grid-cols-3", children: getFilteredCategories().map((cat, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      motion.div,
+      {
+        initial: { opacity: 0, y: 30 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-50px" },
+        transition: { duration: 0.5, delay: i % 3 * 0.08 },
+        whileHover: { y: -4 },
+        className: "group relative overflow-hidden rounded-2xl glass p-6 transition-all hover:border-primary/50 hover:shadow-[0_10px_40px_rgba(0,240,255,0.25)]",
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex items-center gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid size-10 place-items-center rounded-xl border border-primary/30 bg-primary/10 text-primary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(cat.icon, { className: "size-5" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-lg font-semibold", children: cat.title })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-1.5", children: cat.items.map((s, j) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            motion.span,
+            {
+              initial: { opacity: 0, scale: 0.8 },
+              whileInView: { opacity: 1, scale: 1 },
+              viewport: { once: true },
+              transition: { duration: 0.3, delay: 0.1 + j * 0.03 },
+              className: "inline-flex items-center gap-1.5 rounded-md border border-primary/15 bg-primary/[0.06] px-2.5 py-1 text-xs font-medium text-foreground/90 transition-all hover:border-primary/50 hover:bg-primary/15 hover:text-primary",
+              children: [
+                SKILL_ICONS[s] && (() => {
+                  const Icon = SKILL_ICONS[s];
+                  return /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "size-3.5 shrink-0" });
+                })(),
+                s
+              ]
+            },
+            s
+          )) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "pointer-events-none absolute -bottom-10 -right-10 size-32 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100",
+              style: { background: "radial-gradient(circle, rgba(0,240,255,0.4), transparent 70%)" }
+            }
+          )
+        ]
+      },
+      cat.title
+    )) }),
+    getFilteredCategories().length === 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      motion.div,
+      {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        className: "py-12 text-center",
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground", children: "No skills found in this category." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              onClick: () => setActiveFilter("all"),
+              className: "mt-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm text-primary hover:bg-primary/20",
+              children: "View all skills"
+            }
+          )
+        ]
+      }
+    )
+  ] });
+}
+const dwBiImg = "/assets/DataWarehousingBusinessIntelligence-BGGkMxZW.png";
+const studentImg = "/assets/StudentPerformanceDataAnalysis-CF6c9nTC.jpg";
+const nexusImg = "/assets/Nexus-Crrcq0Ow.png";
+const habitxImg = "/assets/HabitX-WCENQlMr.png";
+const cocosmartImg = "/assets/CocoSmart-eR08IwZO.png";
+const bankingImg = "/assets/OnlineBankingSystem-C11qjeUG.png";
+const onlineJobsImg = "/assets/OnlineJobs-CEqr6qtI.jpeg";
+const PROJECTS = [
+  {
+    title: "Data Warehousing & Business Intelligence",
+    desc: "Designed a 6-dimension star schema data warehouse on the Online Shop 2024 dataset with SCD Type 2 on the customer dimension. Built 3 SSIS packages integrating SQL Server, Excel and CSV sources, deployed an SSAS multidimensional cube with Date Hierarchy for OLAP operations, and published interactive Power BI reports using DAX.",
+    tech: ["SQL Server", "SSIS", "SSAS", "Power BI", "DAX", "T-SQL"],
+    image: dwBiImg,
+    liveDemo: "https://app.powerbi.com/groups/8c2c13a9-b472-40c0-b689-f7b90f26620c/reports/5b77a456-515c-4287-af67-80b854cd0ddb?ctid=44e3cf94-19c9-4e32-96c3-14f5bf01391a&pbi_source=linkShare",
+    liveLabel: "Power BI",
+    date: "Feb 2026 – May 2026",
+    type: "Individual"
+  },
+  {
+    title: "Student Performance Data Analysis",
+    desc: "Conducted descriptive (distributions, summary stats) and inferential analysis (Pearson correlation, ANOVA, T-tests) on a 6,607-student Kaggle dataset using R. Built a Multiple Linear Regression model with a 70/30 train-test split achieving R² ≈ 77%, identifying study hours and prior performance as dominant predictors.",
+    tech: ["R", "Statistics", "Regression", "ANOVA"],
+    image: studentImg,
+    date: "Feb 2026 – May 2026",
+    type: "Group"
+  },
+  {
+    title: "Nexus – Smart Campus Operations Hub",
+    desc: "Full-stack university management platform built with Spring Boot and React covering facility bookings, maintenance incidents, notifications, and role-based access control. Developed the Maintenance & Incident Ticketing module with REST APIs supporting Cloudinary attachments, technician assignment, comment system, status/priority filtering, and a React frontend with live progress stepper and role-specific dashboards.",
+    tech: ["Spring Boot", "React", "Cloudinary", "REST APIs"],
+    image: nexusImg,
+    sourceCode: "https://github.com/SandeepaGunathilaka/it3030-paf-2026-smart-campus-group-Y3S1-WD-106",
+    date: "Feb 2026 – May 2026",
+    type: "Group"
+  },
+  {
+    title: "HabitX – Habit Tracking Android App",
+    desc: "Android habit-tracking application built with Kotlin and Material Design 3, featuring habit tracking with circular progress indicators, mood journaling with line chart visualisation, and a water intake tracker with customisable reminder intervals powered by WorkManager.",
+    tech: ["Kotlin", "Android", "Material Design 3", "WorkManager"],
+    image: habitxImg,
+    sourceCode: "https://github.com/kavishlakmal/HabitX",
+    imageContain: true,
+    imageBg: "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
+    date: "Sep 2025 – Oct 2025",
+    type: "Individual"
+  },
+  {
+    title: "CocoSmart – Plantation Management System",
+    desc: "Full-stack MERN coconut plantation management system covering marketplace, finance, authentication, and HR & workforce management. Developed the Labor Management and Task Assignment modules with REST APIs for worker registration with age/NIC validation, task lifecycle management, multi-worker assignment, and real-time availability tracking.",
+    tech: ["MongoDB", "Express", "React", "Node.js"],
+    image: cocosmartImg,
+    sourceCode: "https://github.com/ShafnyHadhy/cocosmart-frontend",
+    liveDemo: "https://cocosmart.vercel.app/",
+    date: "Jul 2025 – Oct 2025",
+    type: "Group"
+  },
+  {
+    title: "Online Banking System",
+    desc: "Java web-based online banking system built with Servlets, JSP and MySQL covering user management, accounts, fund transfers, bill payments, and offers. Developed the Transactions module with fund transfer CRUD operations and a scheduled transactions feature with date/time support, following MVC architecture with JDBC.",
+    tech: ["Java", "JSP", "Servlets", "MySQL"],
+    image: bankingImg,
+    sourceCode: "https://github.com/ShafnyHadhy/online-banking-system",
+    date: "Feb 2025 – May 2025",
+    type: "Group"
+  },
+  {
+    title: "OnlineJobs – Online Job Portal",
+    desc: "Led a 5-member team to build a PHP and MySQL web-based job portal supporting job seeker, employer, and admin roles. Covers job listings, applications, user management, and an admin dashboard for managing users, job postings, and contact messages.",
+    tech: ["PHP", "MySQL", "HTML", "CSS", "JavaScript"],
+    image: onlineJobsImg,
+    sourceCode: "https://github.com/kavishlakmal/Online_Job_Portal",
+    date: "Aug 2024 – Nov 2024",
+    type: "Group"
+  }
+];
+function Projects() {
+  const [filter, setFilter] = reactExports.useState("all");
+  const filteredProjects = PROJECTS.filter((project) => {
+    if (filter === "all") return true;
+    if (filter === "data") return project.tech.some((t) => ["SQL Server", "Power BI", "R", "Statistics", "SSIS", "SSAS"].includes(t));
+    if (filter === "web") return project.tech.some((t) => ["React", "Spring Boot", "Node.js", "Express", "PHP", "JSP"].includes(t));
+    if (filter === "mobile") return project.tech.includes("Kotlin");
+    return true;
+  });
+  const filterButtons = [
+    { id: "all", label: "All Projects" },
+    { id: "data", label: "Data Science" },
+    { id: "web", label: "Web" },
+    { id: "mobile", label: "Mobile" }
+  ];
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Section, { id: "projects", eyebrow: "Projects", title: "Selected work", subtitle: "End-to-end products and experiments across data, web, and mobile.", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      motion.div,
+      {
+        initial: { opacity: 0, y: 20 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true },
+        transition: { duration: 0.5 },
+        className: "mb-10 flex flex-wrap justify-center gap-2",
+        children: filterButtons.map((btn) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            onClick: () => setFilter(btn.id),
+            className: `rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${filter === btn.id ? "bg-primary text-primary-foreground shadow-[0_0_20px_rgba(0,240,255,0.4)]" : "border border-primary/20 bg-primary/5 text-foreground/70 hover:bg-primary/10 hover:text-foreground"}`,
+            children: btn.label
+          },
+          btn.id
+        ))
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-5 sm:grid-cols-2 lg:grid-cols-3", children: filteredProjects.map((p, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      motion.article,
+      {
+        initial: { opacity: 0, y: 30 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-50px" },
+        transition: { duration: 0.5, delay: idx % 3 * 0.08 },
+        className: "group relative flex flex-col overflow-hidden rounded-2xl glass transition-all hover:border-primary/50 hover:shadow-[0_15px_50px_rgba(0,240,255,0.25)]",
+        children: [
+          p.image && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "relative h-44 overflow-hidden",
+              style: p.imageBg ? { background: p.imageBg } : void 0,
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "img",
+                  {
+                    src: p.image,
+                    alt: p.title,
+                    className: `h-full w-full transition-transform duration-500 group-hover:scale-105 ${p.imageContain ? "object-contain py-2" : "object-cover"}`
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col flex-1 p-5", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-base font-semibold leading-tight", children: p.title }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "size-4 shrink-0 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex items-center gap-3 text-xs text-muted-foreground", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "size-3" }),
+                p.date
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { className: "size-3" }),
+                p.type
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-sm text-muted-foreground leading-relaxed", children: p.desc }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 flex flex-wrap gap-1.5", children: p.tech.map((t) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "rounded-md border border-primary/15 bg-primary/5 px-2 py-0.5 text-[11px] font-medium text-foreground/80", children: t }, t)) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-4 flex-1" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "pt-4 border-t border-border flex items-center gap-2 min-h-[2.25rem]", children: [
+              p.liveDemo && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "a",
+                {
+                  href: p.liveDemo,
+                  target: "_blank",
+                  rel: "noreferrer",
+                  className: "inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-all hover:bg-primary hover:text-primary-foreground hover:border-primary",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "size-3" }),
+                    p.liveLabel ?? "Live Demo"
+                  ]
+                }
+              ),
+              p.sourceCode && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "a",
+                {
+                  href: p.sourceCode,
+                  target: "_blank",
+                  rel: "noreferrer",
+                  className: "inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-all hover:bg-primary hover:text-primary-foreground hover:border-primary",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(SiGithub, { className: "size-3" }),
+                    "GitHub"
+                  ]
+                }
+              )
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "pointer-events-none absolute -bottom-12 -right-12 size-32 rounded-full opacity-0 blur-3xl transition-opacity group-hover:opacity-100",
+              style: { background: "radial-gradient(circle, rgba(0,240,255,0.5), transparent 70%)" }
+            }
+          )
+        ]
+      },
+      p.title
+    )) })
+  ] });
+}
+const mongodbLogo = "data:application/octet-stream;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wgARCABkAGQDASIAAhEBAxEB/8QAGwABAAIDAQEAAAAAAAAAAAAAAAYHBAUIAQP/xAAaAQEAAgMBAAAAAAAAAAAAAAAABQYDBAcC/9oADAMBAAIQAxAAAAHnMSESAAAAAAAAkmj6Oj67GKR6pp7Sgq2E7fwAAALOtyJS2p8eYfuXrRfLXylEXuPbQybAAAHQMpqy06lxzSbuKSTHr0RE8nGtnYgy7IAAGZ0bzNvI+u2noPauw6IS1wAAAAAkEfPGIPeUAAAAAAAAD//EACUQAAEDAwQABwAAAAAAAAAAAAQCAwUABjABEBITFRYhIjFAUP/aAAgBAQABBQL78HDqlirgt9JgmvpiHYWU/GgNxglXdEdDmGygebuxgqTRXW1Mu4LVa6oSh189rma6pvBbDnZCVFr57XS5zm8FlHe2oBfOn3kjMkv6lEYAy1gkx57ckLay+VXdM6OY4mXeiX5R3y6P85JaU8S/B//EACsRAAECAwQKAwEAAAAAAAAAAAECAwAEBRESIDETFCEwMkFRYZGhIkKB0f/aAAgBAwEBPwHc1qpai1cb41eu8UCqG9qjxzy/mKrvl+dcJ5GzxHyaXaMxEu7p2UO9QDhqrJYnXEnrb52xNIImCgRKtaBhDR5ADDWKXr6L7fGPfaJCnomJk1A8P1/NluNppDCA2jLd/wD/xAAhEQABAwQCAwEAAAAAAAAAAAACAQMEABITIBEhMDFBIv/aAAgBAgEBPwHwy5GEeE9rUGT3iPaUd7xV2K02V4IWskLHiSnU/fFNjYCDrLjZ05H3TDCOOZ/nzcRQEtTx/wD/xAAxEAACAQEEBwYGAwAAAAAAAAABAgMRAAQQMCEiMTJBUWEFEhQzQqETQFBxc8F0kbH/2gAIAQEABj8C+fpshXS7fqytdkCzQrRVHqXllpFGKu5oLJBHw2nmcPGRDUc0kHI88qW9sNzUX78cZYH3XFLPG2hlNDkw83qx/vCXo5GF5psNG9sm79Kj3wvfS8MMJ6cKD2yZroTp8xf3h2h/LezyuaIgqbSTNtdi2THPHvIa2WeI6DtHI8rdofnJt4GE6B5hH+Zffj1kO8h2GxjujHvXsly59I6Zt21SvwowhrxP0H//xAAoEAEAAQEGBQQDAAAAAAAAAAABETEAITBBUZEQYXGB8CChscFAUNH/2gAIAQEAAT8h/DRK4hZzHHpo5to5gBoeYsFIkJUcKMZJWEiic/OeBjFhDxT89cIZI9yq2jfjWgfTo9rCjLlojDgikLzeD4D0ZgkELuBfecEIdS/Z8PFqnAK8H2+CVBHq5fTh23butPaFuRavZjlLgtTERz1O9pJHXc5W87X2UZLTnnL+8PQYXXP087X5XLv0t1bKqW9xCur6hOo/of/aAAwDAQACAAMAAAAQBBBJBBBBBeuBBBBBf3DBBBB/eKBBBBmsBBBBBBCBBBBBBBBB9//EACMRAQABAwQBBQEAAAAAAAAAAAERITFxACBBUWEwgaGxwfH/2gAIAQMBAT8Q9GHS5Hhz+DzjQRMJTe7qzc805I2p1RDij5ZffQgWEEem5r+wQDtOW6GKH3Hto1ZaAZDSXI5kAdpnQt+Hb8eHM6rM0QbyBI4hGDuvU7jBgTBln7fT/8QAIxEBAAAEBgIDAAAAAAAAAAAAAQARITEgQWFxkdEwgaGxwf/aAAgBAgEBPxDw+vbTXqEJi9n86xOxyZHqkUaXI1TB5MLIZs+awozen1E9sgPjDIbW2unUJFsbUm7NucZ0aHj/AP/EACYQAQABAgUEAgMBAAAAAAAAAAERIUEAMDFRYRBxgaGRsUBQwfD/2gAIAQEAAT8Q/DhYJJJJqZg9P0JFicD2JbQlhVEAHsa+ReRWzkBCOzlbPdjldXYNVsDgxCUnC9Xu6bAFuhz4gaLp2X8MoPICdNAkORDs+oEikYmaUOVCcmOcCXoHyOSEwg66k6C5T6OOhZA2N/fGSaUQDs/ww+el6n0/SWIko3JfhU8ZLTxBF0IAdoccvS8zJO6n6wETaPCWOdjFL07mRIwcEx4yYOOg6HReAo8OIrAhGm+QeyEomL3M/wCrxgSZalBZB4a8gLOXOqiWAvotZyKIRhwaeIINWddSN4RwijKrKuZa8aIGjGg0/QBOP//Z";
+const sliitLogo = "data:application/octet-stream;base64,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";
+const ciscoLogo = "data:application/octet-stream;base64,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";
+const oracleLogo = "data:application/octet-stream;base64,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";
+const esoftLogo = "data:application/octet-stream;base64,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";
+const moratuwLogo = "/assets/moratuwa_logo-CQ87_w9s.jfif";
+const awsLogo = "/assets/aws_logo-CsCzHovK.png";
+const CERTS = [
+  {
+    name: "MongoDB Data Modeling Path",
+    org: "MongoDB",
+    issued: "May 2026",
+    logo: mongodbLogo
+  },
+  {
+    name: "MongoDB Atlas Administrator Path",
+    org: "MongoDB",
+    issued: "May 2026",
+    logo: mongodbLogo
+  },
+  {
+    name: "AI/ML Engineer — Stage 1",
+    org: "SLIIT",
+    issued: "Jan 2026",
+    logo: sliitLogo
+  },
+  {
+    name: "Introduction to Data Science",
+    org: "Cisco",
+    issued: "Dec 2025",
+    logo: ciscoLogo
+  },
+  {
+    name: "Oracle Java Foundations",
+    org: "Oracle",
+    issued: "Sep 2025",
+    logo: oracleLogo
+  },
+  {
+    name: "Python for Beginners",
+    org: "University of Moratuwa",
+    issued: "Dec 2024",
+    logo: moratuwLogo
+  },
+  {
+    name: "Diploma in Information Technology",
+    org: "ESOFT Metro Campus",
+    issued: "Jul 2019",
+    logo: esoftLogo
+  },
+  {
+    name: "Diploma in English",
+    org: "ESOFT Metro Campus",
+    issued: "Jun 2019",
+    logo: esoftLogo
+  },
+  {
+    name: "AWS Cloud Practitioner Essentials",
+    org: "Amazon Web Services",
+    issued: "Jun 2026",
+    logo: awsLogo
+  }
+];
+function Certifications() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Section, { id: "certifications", eyebrow: "Certifications", title: "Continuous learning", subtitle: "Credentials that back the craft.", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-4 sm:grid-cols-2 lg:grid-cols-4", children: CERTS.map((c, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    motion.div,
+    {
+      initial: { opacity: 0, y: 30 },
+      whileInView: { opacity: 1, y: 0 },
+      viewport: { once: true, margin: "-50px" },
+      transition: { duration: 0.5, delay: i % 4 * 0.08 },
+      whileHover: { y: -6, rotate: -0.4 },
+      className: "group relative overflow-hidden rounded-2xl glass p-5 transition-all hover:border-primary/50 hover:shadow-[0_15px_40px_rgba(0,240,255,0.2)] dark:hover:shadow-[0_15px_40px_rgba(0,240,255,0.3)]",
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "absolute right-0 top-0 size-24 opacity-10 transition-opacity group-hover:opacity-25 dark:opacity-30 dark:group-hover:opacity-60",
+            style: { background: "radial-gradient(circle at 100% 0%, rgba(0,240,255,0.6), transparent 60%)" }
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "size-12 overflow-hidden rounded-lg border border-primary/30", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "img",
+            {
+              src: c.logo,
+              alt: c.org,
+              className: "size-full object-cover"
+            }
+          ) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-4 font-display text-sm font-semibold leading-snug", children: c.name }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-1 text-xs text-muted-foreground", children: c.org }),
+          c.issued && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 inline-block rounded-md border border-primary/20 bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary", children: [
+            "Issued ",
+            c.issued
+          ] })
+        ] })
+      ]
+    },
+    c.name
+  )) }) });
+}
+const INFO = [
+  {
+    label: "Email",
+    value: "kavishka.l.edirisinghe@gmail.com",
+    copy: "kavishka.l.edirisinghe@gmail.com",
+    url: "mailto:kavishka.l.edirisinghe@gmail.com",
+    icon: () => /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "size-4" })
+  },
+  {
+    label: "Phone",
+    value: "+94 70 596 3473",
+    copy: "+94705963473",
+    url: "tel:+94705963473",
+    icon: () => /* @__PURE__ */ jsxRuntimeExports.jsx(Phone, { className: "size-4" })
+  },
+  {
+    label: "LinkedIn",
+    value: "linkedin.com/in/kavishlakmal",
+    copy: "https://www.linkedin.com/in/kavishlakmal",
+    url: "https://www.linkedin.com/in/kavishlakmal",
+    icon: () => /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "size-4", viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" }) })
+  },
+  {
+    label: "GitHub",
+    value: "github.com/kavishlakmal",
+    copy: "https://github.com/kavishlakmal",
+    url: "https://github.com/kavishlakmal",
+    icon: () => /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "size-4", viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z" }) })
+  }
+];
+function Contact() {
+  const [copied, setCopied] = reactExports.useState(null);
+  const [sent, setSent] = reactExports.useState(false);
+  const [loading, setLoading] = reactExports.useState(false);
+  const [error, setError] = reactExports.useState(false);
+  const copy = async (v, k) => {
+    try {
+      await navigator.clipboard.writeText(v);
+      setCopied(k);
+      setTimeout(() => setCopied(null), 1600);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+      const textarea = document.createElement("textarea");
+      textarea.value = v;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      setCopied(k);
+      setTimeout(() => setCopied(null), 1600);
+    }
+  };
+  const submit = async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
+    setLoading(true);
+    setError(false);
+    try {
+      const res = await fetch("https://formspree.io/f/xeewzyqb", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        setSent(true);
+        form.reset();
+        setTimeout(() => setSent(false), 4e3);
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Section, { id: "contact", eyebrow: "Contact", title: "Let's build something together", subtitle: "Open to internships, collaborations and meaningful conversations.", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-6 lg:grid-cols-5", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      motion.div,
+      {
+        initial: { opacity: 0, x: -30 },
+        whileInView: { opacity: 1, x: 0 },
+        viewport: { once: true },
+        transition: { duration: 0.6 },
+        className: "glass-strong relative overflow-hidden rounded-3xl p-6 sm:p-8 lg:col-span-2",
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "absolute inset-0 opacity-50",
+              style: { background: "radial-gradient(circle at 0% 100%, rgba(0,240,255,0.3), transparent 60%)" }
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold", children: "Connect with Me" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm text-muted-foreground", children: "Reach out via email or social media." }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-6 space-y-3", children: INFO.map((i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "a",
+              {
+                href: i.url,
+                target: i.url.startsWith("mailto") ? void 0 : "_blank",
+                rel: "noreferrer",
+                className: "group flex items-center gap-3 rounded-xl border border-primary/15 bg-primary/[0.04] p-3 transition-all hover:border-primary/40 hover:bg-primary/10",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid size-9 shrink-0 place-items-center rounded-lg border border-primary/30 bg-primary/10 text-primary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(i.icon, {}) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0 grow", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-[11px] uppercase tracking-wider text-muted-foreground", children: i.label }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "truncate text-sm font-medium group-hover:text-primary transition-colors", children: i.value })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "button",
+                    {
+                      onClick: (e) => {
+                        e.preventDefault();
+                        copy(i.copy, i.label);
+                      },
+                      "aria-label": `Copy ${i.label}`,
+                      className: "rounded-lg p-2 text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary shrink-0",
+                      children: copied === i.label ? /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { className: "size-4 text-primary" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { className: "size-4" })
+                    }
+                  )
+                ]
+              },
+              i.label
+            )) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 border-t border-primary/15 pt-6 space-y-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2.5", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "relative flex size-2.5", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute inline-flex size-full animate-ping rounded-full bg-green-400 opacity-75" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "relative inline-flex size-2.5 rounded-full bg-green-400" })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-muted-foreground", children: "Available for internships" })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "a",
+                {
+                  href: "/cv/Kavishka_Edirisinghe.pdf",
+                  download: "Kavishka_Edirisinghe.pdf",
+                  className: "inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-5 py-2.5 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(Download, { className: "size-4" }),
+                    "Download CV"
+                  ]
+                }
+              )
+            ] })
+          ] })
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      motion.form,
+      {
+        onSubmit: submit,
+        initial: { opacity: 0, x: 30 },
+        whileInView: { opacity: 1, x: 0 },
+        viewport: { once: true },
+        transition: { duration: 0.6 },
+        className: "glass rounded-3xl p-6 sm:p-8 lg:col-span-3",
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold", children: "Send a message" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm text-muted-foreground", children: "I'll get back to you within 24 hours." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5 grid gap-4 sm:grid-cols-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Name", name: "name", type: "text", placeholder: "Your name" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Email", name: "email", type: "email", placeholder: "you@email.com" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Subject", name: "subject", type: "text", placeholder: "What's this about?" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-xs font-medium uppercase tracking-wider text-muted-foreground", children: "Message" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "textarea",
+              {
+                required: true,
+                name: "message",
+                rows: 5,
+                placeholder: "Tell me a bit about it…",
+                className: "mt-2 w-full rounded-xl border border-primary/20 bg-background/40 px-4 py-3 text-sm outline-none transition-all placeholder:text-muted-foreground/60 focus:border-primary focus:shadow-[0_0_0_3px_rgba(0,240,255,0.18)]"
+              }
+            )
+          ] }),
+          error && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-sm text-destructive", children: "Something went wrong. Please try again." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.button,
+            {
+              type: "submit",
+              disabled: loading,
+              whileTap: { scale: 0.97 },
+              className: "group relative mt-5 inline-flex items-center gap-2 overflow-hidden rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:shadow-[0_0_30px_rgba(0,240,255,0.6)] disabled:opacity-70 disabled:cursor-not-allowed",
+              children: sent ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { className: "size-4" }),
+                "Sent · I'll get back to you"
+              ] }) : loading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "size-4 animate-spin" }),
+                "Sending…"
+              ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "size-4 transition-transform group-hover:translate-x-0.5" }),
+                "Send Message"
+              ] })
+            }
+          )
+        ]
+      }
+    )
+  ] }) });
+}
+function Field({ label, name, ...rest }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-medium uppercase tracking-wider text-muted-foreground", children: label }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "input",
+      {
+        required: true,
+        name,
+        ...rest,
+        className: "mt-2 w-full rounded-xl border border-primary/20 bg-background/40 px-4 py-3 text-sm outline-none transition-all placeholder:text-muted-foreground/60 focus:border-primary focus:shadow-[0_0_0_3px_rgba(0,240,255,0.18)]"
+      }
+    )
+  ] });
+}
+function Footer() {
+  const year = (/* @__PURE__ */ new Date()).getFullYear();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "border-t border-primary/15 px-4 py-10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-display text-lg font-semibold", children: "Kavishka Edirisinghe" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-muted-foreground", children: "Data Science Undergraduate" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-xs italic text-muted-foreground", children: '"Transforming Data Into Actionable Insights"' }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-xs text-muted-foreground", children: [
+      "© ",
+      year,
+      " · All rights reserved."
+    ] })
+  ] }) });
+}
+function Loader() {
+  const [pct, setPct] = reactExports.useState(0);
+  reactExports.useEffect(() => {
+    let raf = 0;
+    const start = performance.now();
+    const dur = 2600;
+    const tick = (t) => {
+      const p = Math.min(1, (t - start) / dur);
+      setPct(Math.round(p * 100));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+  const nodes = Array.from({ length: 22 }).map((_, i) => ({
+    x: 40 + Math.random() * 320,
+    y: 30 + Math.random() * 180,
+    r: 2 + Math.random() * 2,
+    d: Math.random() * 1.2,
+    k: i
+  }));
+  const edges = [];
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[i].x - nodes[j].x;
+      const dy = nodes[i].y - nodes[j].y;
+      if (Math.hypot(dx, dy) < 70) edges.push([i, j]);
+    }
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    motion.div,
+    {
+      initial: { opacity: 1 },
+      exit: { opacity: 0 },
+      transition: { duration: 0.7, ease: "easeInOut" },
+      className: "fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background",
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { width: "400", height: "240", viewBox: "0 0 400 240", className: "overflow-visible", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("defs", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("linearGradient", { id: "ke-grad", x1: "0", x2: "1", y1: "0", y2: "1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("stop", { offset: "0%", stopColor: "#00F0FF" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("stop", { offset: "100%", stopColor: "#7DD3FC" })
+          ] }) }),
+          edges.map(([a, b], i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.line,
+            {
+              x1: nodes[a].x,
+              y1: nodes[a].y,
+              x2: nodes[b].x,
+              y2: nodes[b].y,
+              stroke: "#00F0FF",
+              strokeWidth: "0.6",
+              strokeOpacity: "0.6",
+              initial: { pathLength: 0, opacity: 0 },
+              animate: { pathLength: 1, opacity: [0, 0.7, 0] },
+              transition: { duration: 2.4, delay: i * 0.015, times: [0, 0.4, 1] }
+            },
+            `e-${i}`
+          )),
+          nodes.map((n) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.circle,
+            {
+              cx: n.x,
+              cy: n.y,
+              r: n.r,
+              fill: "#00F0FF",
+              initial: { opacity: 0, scale: 0 },
+              animate: { opacity: [0, 1, 0], scale: [0, 1, 0] },
+              transition: { duration: 2.4, delay: n.d, times: [0, 0.45, 1] },
+              style: { filter: "drop-shadow(0 0 6px #00F0FF)" }
+            },
+            `n-${n.k}`
+          )),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.text,
+            {
+              x: "200",
+              y: "155",
+              textAnchor: "middle",
+              fontFamily: "Space Grotesk, sans-serif",
+              fontSize: "120",
+              fontWeight: "700",
+              fill: "url(#ke-grad)",
+              stroke: "#00F0FF",
+              strokeWidth: "1",
+              initial: { opacity: 0 },
+              animate: { opacity: 1 },
+              transition: { delay: 1.3, duration: 0.9, ease: "easeOut" },
+              style: { filter: "drop-shadow(0 0 20px rgba(0,240,255,0.55))" },
+              children: "KE"
+            }
+          )
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 flex flex-col items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-px w-48 overflow-hidden bg-white/10", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.div,
+            {
+              className: "h-full bg-primary",
+              style: { width: `${pct}%`, boxShadow: "0 0 12px #00F0FF" }
+            }
+          ) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "font-mono text-xs tracking-[0.3em] text-muted-foreground", children: [
+            String(pct).padStart(3, "0"),
+            "% · INITIALIZING"
+          ] })
+        ] })
+      ]
+    }
+  );
+}
+function GridBackground() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-background", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 grid-bg radial-fade opacity-60" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "div",
+      {
+        className: "absolute left-1/2 top-[10%] size-[600px] -translate-x-1/2 rounded-full blur-[120px]",
+        style: { background: "radial-gradient(circle, rgba(0,240,255,0.25), transparent 70%)" }
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "div",
+      {
+        className: "absolute right-[-10%] bottom-[10%] size-[500px] rounded-full blur-[120px]",
+        style: { background: "radial-gradient(circle, rgba(0,240,255,0.15), transparent 70%)" }
+      }
+    ),
+    Array.from({ length: 18 }).map((_, i) => {
+      const left = i * 53 % 100;
+      const top = i * 37 % 100;
+      const dur = 8 + i % 6;
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(
+        motion.div,
+        {
+          className: "absolute size-1 rounded-full bg-primary",
+          style: { left: `${left}%`, top: `${top}%`, boxShadow: "0 0 8px #00F0FF" },
+          animate: { y: [0, -30, 0], opacity: [0.2, 0.8, 0.2] },
+          transition: { duration: dur, repeat: Infinity, delay: i * 0.3, ease: "easeInOut" }
+        },
+        i
+      );
+    })
+  ] });
+}
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 1e-3 });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    motion.div,
+    {
+      style: { scaleX, transformOrigin: "0% 50%" },
+      className: "fixed inset-x-0 top-0 z-[60] h-0.5 bg-primary shadow-[0_0_10px_#00F0FF]"
+    }
+  );
+}
+function Index() {
+  const [loading, setLoading] = reactExports.useState(true);
+  reactExports.useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 2800);
+    return () => clearTimeout(t);
+  }, []);
+  reactExports.useEffect(() => {
+    const root = document.documentElement;
+    const stored = localStorage.getItem("theme");
+    const theme = stored ?? "dark";
+    root.classList.remove("light", "dark");
+    root.classList.add(theme);
+    if (!stored) localStorage.setItem("theme", "dark");
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: loading && /* @__PURE__ */ jsxRuntimeExports.jsx(Loader, {}) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollProgress, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GridBackground, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative min-h-screen", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Hero, {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(About, {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Skills, {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Projects, {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Certifications, {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Contact, {})
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
+    ] })
+  ] });
+}
+export {
+  Index as component
+};
