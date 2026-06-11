@@ -15,7 +15,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-const appCss = "/assets/styles-CGfD32RG.css";
+const appCss = "/assets/styles-iUsD9q5n.css";
 function reportLovableError(error, context = {}) {
   if (typeof window === "undefined") return;
   window.__lovableEvents?.captureException?.(
@@ -32,6 +32,22 @@ function reportLovableError(error, context = {}) {
     }
   );
 }
+const themeInitScript = `
+(() => {
+  try {
+    const root = document.documentElement;
+    root.classList.remove('light', 'dark');
+    root.classList.add('dark');
+    root.style.colorScheme = 'dark';
+    localStorage.setItem('theme', 'dark');
+  } catch {
+    const root = document.documentElement;
+    root.classList.remove('light');
+    root.classList.add('dark');
+    root.style.colorScheme = 'dark';
+  }
+})();
+`;
 function NotFoundComponent() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md text-center", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-7xl font-bold text-foreground", children: "404" }),
@@ -97,6 +113,15 @@ const Route$1 = createRootRouteWithContext()({
       {
         rel: "stylesheet",
         href: appCss
+      },
+      {
+        rel: "icon",
+        type: "image/svg+xml",
+        href: "/favicon.svg"
+      },
+      {
+        rel: "apple-touch-icon",
+        href: "/favicon.svg"
       }
     ]
   }),
@@ -106,8 +131,11 @@ const Route$1 = createRootRouteWithContext()({
   errorComponent: ErrorComponent
 });
 function RootShell({ children }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("html", { lang: "en", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("head", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(HeadContent, {}) }),
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("html", { lang: "en", className: "dark", suppressHydrationWarning: true, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("head", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("script", { dangerouslySetInnerHTML: { __html: themeInitScript } }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(HeadContent, {})
+    ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("body", { children: [
       children,
       /* @__PURE__ */ jsxRuntimeExports.jsx(Scripts, {})
@@ -118,7 +146,7 @@ function RootComponent() {
   const { queryClient } = Route$1.useRouteContext();
   return /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {}) });
 }
-const $$splitComponentImporter = () => import("./index-X5Re9_dq.mjs");
+const $$splitComponentImporter = () => import("./index-DB6WQnL1.mjs");
 const Route = createFileRoute("/")({
   head: () => ({
     meta: [{

@@ -11,6 +11,24 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import mainLogo from "@/assets/Main Logo.png";
+
+const themeInitScript = `
+(() => {
+  try {
+    const root = document.documentElement;
+    root.classList.remove('light', 'dark');
+    root.classList.add('dark');
+    root.style.colorScheme = 'dark';
+    localStorage.setItem('theme', 'dark');
+  } catch {
+    const root = document.documentElement;
+    root.classList.remove('light');
+    root.classList.add('dark');
+    root.style.colorScheme = 'dark';
+  }
+})();
+`;
 
 function NotFoundComponent() {
   return (
@@ -91,6 +109,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
+      {
+        rel: "icon",
+        type: "image/svg+xml",
+        href: "/favicon.svg",
+      },
+      {
+        rel: "apple-touch-icon",
+        href: "/favicon.svg",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -101,8 +128,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <HeadContent />
       </head>
       <body>

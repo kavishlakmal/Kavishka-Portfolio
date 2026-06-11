@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import mainLogo from "@/assets/Main Logo.png";
 
 export function Loader() {
   const [pct, setPct] = useState(0);
@@ -39,7 +40,7 @@ export function Loader() {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7, ease: "easeInOut" }}
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background"
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-slate-950 text-white"
     >
       <div className="relative">
         <svg width="400" height="240" viewBox="0 0 400 240" className="overflow-visible">
@@ -74,23 +75,19 @@ export function Loader() {
             />
           ))}
 
-          {/* KE forms */}
-          <motion.text
-            x="200" y="155"
-            textAnchor="middle"
-            fontFamily="Space Grotesk, sans-serif"
-            fontSize="120"
-            fontWeight="700"
-            fill="url(#ke-grad)"
-            stroke="#00F0FF"
-            strokeWidth="1"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.3, duration: 0.9, ease: "easeOut" }}
-            style={{ filter: "drop-shadow(0 0 20px rgba(0,240,255,0.55))" }}
-          >
-            KE
-          </motion.text>
+          {/* Logo reveal */}
+          <motion.image
+            href={mainLogo}
+            x="130"
+            y="50"
+            width="140"
+            height="140"
+            preserveAspectRatio="xMidYMid meet"
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.9, duration: 0.75, ease: "easeOut" }}
+            style={{ filter: "drop-shadow(0 0 22px rgba(0,240,255,0.6))" }}
+          />
         </svg>
       </div>
 
@@ -102,7 +99,7 @@ export function Loader() {
           />
         </div>
         <div className="font-mono text-xs tracking-[0.3em] text-muted-foreground">
-          {String(pct).padStart(3, "0")}% · INITIALIZING
+          {String(pct).padStart(3, "0")}%
         </div>
       </div>
     </motion.div>

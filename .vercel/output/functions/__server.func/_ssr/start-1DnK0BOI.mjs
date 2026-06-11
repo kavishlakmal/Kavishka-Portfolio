@@ -1,4 +1,4 @@
-import { c as createMiddleware } from "./server-uYUMT6g5.mjs";
+import { c as createMiddleware } from "./server-Dg6aVD8y.mjs";
 import { r as renderErrorPage } from "./index.mjs";
 import "../_libs/react.mjs";
 import "node:async_hooks";

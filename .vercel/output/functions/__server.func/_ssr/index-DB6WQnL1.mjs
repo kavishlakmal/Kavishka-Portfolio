@@ -4,6 +4,7 @@ import { A as AnimatePresence, m as motion, u as useScroll, a as useSpring } fro
 import { S as Sun, M as Moon, X, a as Menu, A as ArrowRight, D as Download, b as Mail, C as ChartColumn, c as ChartLine, B as Brain, d as Database, T as TrendingUp, e as CodeXml, f as Smartphone, g as MapPin, h as Briefcase, G as GraduationCap, i as BookOpen, L as Laptop, j as Award, F as Funnel, k as ChartPie, l as Layers, W as Wrench, m as ArrowUpRight, n as Calendar, U as Users, E as ExternalLink, o as Check, p as Copy, q as LoaderCircle, r as Send, P as Phone } from "../_libs/lucide-react.mjs";
 import "../_libs/motion-dom.mjs";
 import "../_libs/motion-utils.mjs";
+const mainLogo = "/assets/Main%20Logo-P9dOcaHH.png";
 const links = [
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
@@ -15,14 +16,12 @@ function Navbar() {
   const [open, setOpen] = reactExports.useState(false);
   const [scrolled, setScrolled] = reactExports.useState(false);
   const [active, setActive] = reactExports.useState("hero");
-  const [theme, setTheme] = reactExports.useState(
-    () => typeof window !== "undefined" && localStorage.getItem("theme") || "dark"
-  );
+  const [theme, setTheme] = reactExports.useState("dark");
   reactExports.useEffect(() => {
     const root = document.documentElement;
     root.classList.remove("light", "dark");
     root.classList.add(theme);
-    localStorage.setItem("theme", theme);
+    root.style.colorScheme = theme;
   }, [theme]);
   reactExports.useEffect(() => {
     const onScroll = () => {
@@ -45,6 +44,9 @@ function Navbar() {
     setOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
+  const logoFilter = theme === "dark" ? "drop-shadow(0 0 22px rgba(0,240,255,0.6)) drop-shadow(0 0 6px rgba(0,240,255,0.35))" : "none";
+  const activeNavTextClass = theme === "dark" ? "text-primary drop-shadow-[0_0_8px_rgba(0,240,255,0.45)]" : "text-primary drop-shadow-[0_0_4px_rgba(0,240,255,0.28)]";
+  const activeNavPillClass = theme === "dark" ? "border border-primary/45 bg-primary/20 shadow-[0_0_16px_rgba(0,240,255,0.18)]" : "border border-primary/35 bg-primary/25 shadow-[0_0_12px_rgba(0,240,255,0.12)]";
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     motion.header,
     {
@@ -55,21 +57,35 @@ function Navbar() {
       children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `flex items-center justify-between rounded-2xl px-4 py-3 transition-all ${scrolled ? "glass-strong" : "border border-transparent"}`, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { onClick: () => go("hero"), className: "group flex items-center gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid size-9 place-items-center rounded-lg border border-primary/40 bg-primary/10 font-display text-sm font-bold text-primary shadow-[0_0_20px_rgba(0,240,255,0.35)] transition-all group-hover:bg-primary/20", children: "KE" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "span",
+              {
+                className: `relative inline-flex size-9 items-center justify-center overflow-hidden rounded-lg transition-all ${theme === "light" ? "border border-primary/35 bg-primary/10 shadow-[0_0_20px_rgba(0,240,255,0.35)]" : "bg-transparent"}`,
+                children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "img",
+                  {
+                    src: mainLogo,
+                    alt: "Kavishka Edirisinghe",
+                    className: "block size-9 object-contain transition-transform duration-300 group-hover:scale-105",
+                    style: { filter: logoFilter }
+                  }
+                )
+              }
+            ),
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "hidden font-display text-sm font-semibold tracking-wide sm:inline", children: "Kavishka Edirisinghe" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "hidden items-center gap-1 lg:flex", children: links.map((l) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "button",
             {
               onClick: () => go(l.id),
-              className: `relative rounded-full px-3 py-1.5 text-sm transition-colors ${active === l.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`,
+              className: `relative rounded-full px-3 py-1.5 text-sm transition-colors ${active === l.id ? activeNavTextClass : "text-muted-foreground hover:text-foreground"}`,
               children: [
                 l.label,
                 active === l.id && /* @__PURE__ */ jsxRuntimeExports.jsx(
                   motion.span,
                   {
                     layoutId: "nav-active",
-                    className: "absolute inset-0 -z-10 rounded-full border border-primary/40 bg-primary/15",
+                    className: `absolute inset-0 -z-10 rounded-full ${activeNavPillClass}`,
                     transition: { type: "spring", stiffness: 380, damping: 30 }
                   }
                 )
@@ -109,7 +125,7 @@ function Navbar() {
               "button",
               {
                 onClick: () => go(l.id),
-                className: `block w-full rounded-xl px-4 py-3 text-left text-sm ${active === l.id ? "bg-primary/15 text-foreground" : "text-muted-foreground"}`,
+                className: `block w-full rounded-xl px-4 py-3 text-left text-sm transition-colors ${active === l.id ? `${theme === "dark" ? "bg-primary/20" : "bg-primary/25"} ${activeNavTextClass}` : "text-muted-foreground"}`,
                 children: l.label
               },
               l.id
@@ -1199,7 +1215,7 @@ function Loader() {
       initial: { opacity: 1 },
       exit: { opacity: 0 },
       transition: { duration: 0.7, ease: "easeInOut" },
-      className: "fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background",
+      className: "fixed inset-0 z-[100] flex flex-col items-center justify-center bg-slate-950 text-white",
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { width: "400", height: "240", viewBox: "0 0 400 240", className: "overflow-visible", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("defs", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("linearGradient", { id: "ke-grad", x1: "0", x2: "1", y1: "0", y2: "1", children: [
@@ -1237,22 +1253,18 @@ function Loader() {
             `n-${n.k}`
           )),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            motion.text,
+            motion.image,
             {
-              x: "200",
-              y: "155",
-              textAnchor: "middle",
-              fontFamily: "Space Grotesk, sans-serif",
-              fontSize: "120",
-              fontWeight: "700",
-              fill: "url(#ke-grad)",
-              stroke: "#00F0FF",
-              strokeWidth: "1",
-              initial: { opacity: 0 },
-              animate: { opacity: 1 },
-              transition: { delay: 1.3, duration: 0.9, ease: "easeOut" },
-              style: { filter: "drop-shadow(0 0 20px rgba(0,240,255,0.55))" },
-              children: "KE"
+              href: mainLogo,
+              x: "130",
+              y: "50",
+              width: "140",
+              height: "140",
+              preserveAspectRatio: "xMidYMid meet",
+              initial: { opacity: 0, scale: 0.85 },
+              animate: { opacity: 1, scale: 1 },
+              transition: { delay: 0.9, duration: 0.75, ease: "easeOut" },
+              style: { filter: "drop-shadow(0 0 22px rgba(0,240,255,0.6))" }
             }
           )
         ] }) }),
@@ -1266,7 +1278,7 @@ function Loader() {
           ) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "font-mono text-xs tracking-[0.3em] text-muted-foreground", children: [
             String(pct).padStart(3, "0"),
-            "% · INITIALIZING"
+            "%"
           ] })
         ] })
       ]

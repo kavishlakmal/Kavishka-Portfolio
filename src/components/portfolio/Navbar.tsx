@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
+import mainLogo from "@/assets/Main Logo.png";
 
 const links = [
   { id: "about", label: "About" },
@@ -14,15 +15,13 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("hero");
-  const [theme, setTheme] = useState<"light" | "dark">(
-    () => (typeof window !== "undefined" && (localStorage.getItem("theme") as "light" | "dark")) || "dark",
-  );
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove("light", "dark");
     root.classList.add(theme);
-    localStorage.setItem("theme", theme);
+    root.style.colorScheme = theme;
   }, [theme]);
 
   useEffect(() => {
@@ -45,6 +44,21 @@ export function Navbar() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const logoFilter =
+    theme === "dark"
+      ? "drop-shadow(0 0 22px rgba(0,240,255,0.6)) drop-shadow(0 0 6px rgba(0,240,255,0.35))"
+      : "none";
+
+  const activeNavTextClass =
+    theme === "dark"
+      ? "text-primary drop-shadow-[0_0_8px_rgba(0,240,255,0.45)]"
+      : "text-primary drop-shadow-[0_0_4px_rgba(0,240,255,0.28)]";
+
+  const activeNavPillClass =
+    theme === "dark"
+      ? "border border-primary/45 bg-primary/20 shadow-[0_0_16px_rgba(0,240,255,0.18)]"
+      : "border border-primary/35 bg-primary/25 shadow-[0_0_12px_rgba(0,240,255,0.12)]";
+
   return (
     <motion.header
       initial={{ y: -32, opacity: 0 }}
@@ -55,9 +69,16 @@ export function Navbar() {
       <div className="mx-auto max-w-7xl">
         <div className={`flex items-center justify-between rounded-2xl px-4 py-3 transition-all ${scrolled ? "glass-strong" : "border border-transparent"}`}>
           <button onClick={() => go("hero")} className="group flex items-center gap-2">
-            <div className="grid size-9 place-items-center rounded-lg border border-primary/40 bg-primary/10 font-display text-sm font-bold text-primary shadow-[0_0_20px_rgba(0,240,255,0.35)] transition-all group-hover:bg-primary/20">
-              KE
-            </div>
+            <span
+              className={`relative inline-flex size-9 items-center justify-center overflow-hidden rounded-lg transition-all ${theme === "light" ? "border border-primary/35 bg-primary/10 shadow-[0_0_20px_rgba(0,240,255,0.35)]" : "bg-transparent"}`}
+            >
+              <img
+                src={mainLogo}
+                alt="Kavishka Edirisinghe"
+                className="block size-9 object-contain transition-transform duration-300 group-hover:scale-105"
+                style={{ filter: logoFilter }}
+              />
+            </span>
             <span className="hidden font-display text-sm font-semibold tracking-wide sm:inline">Kavishka Edirisinghe</span>
           </button>
 
@@ -66,13 +87,13 @@ export function Navbar() {
               <button
                 key={l.id}
                 onClick={() => go(l.id)}
-                className={`relative rounded-full px-3 py-1.5 text-sm transition-colors ${active === l.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                className={`relative rounded-full px-3 py-1.5 text-sm transition-colors ${active === l.id ? activeNavTextClass : "text-muted-foreground hover:text-foreground"}`}
               >
                 {l.label}
                 {active === l.id && (
                   <motion.span
                     layoutId="nav-active"
-                    className="absolute inset-0 -z-10 rounded-full border border-primary/40 bg-primary/15"
+                    className={`absolute inset-0 -z-10 rounded-full ${activeNavPillClass}`}
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -112,7 +133,7 @@ export function Navbar() {
                 <button
                   key={l.id}
                   onClick={() => go(l.id)}
-                  className={`block w-full rounded-xl px-4 py-3 text-left text-sm ${active === l.id ? "bg-primary/15 text-foreground" : "text-muted-foreground"}`}
+                  className={`block w-full rounded-xl px-4 py-3 text-left text-sm transition-colors ${active === l.id ? `${theme === "dark" ? "bg-primary/20" : "bg-primary/25"} ${activeNavTextClass}` : "text-muted-foreground"}`}
                 >
                   {l.label}
                 </button>
