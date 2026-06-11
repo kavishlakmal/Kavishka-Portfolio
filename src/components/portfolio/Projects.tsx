@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Section } from "./Section";
-import { ArrowUpRight, ExternalLink, Calendar, Users } from "lucide-react";
+import { ExternalLink, Calendar, Users } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import dwBiImg from "@/assets/DataWarehousingBusinessIntelligence.png";
 import studentImg from "@/assets/StudentPerformanceDataAnalysis.jpg";
@@ -167,7 +167,6 @@ export function Projects() {
             <div className="flex flex-col flex-1 p-5">
               <div className="flex items-start justify-between gap-3">
                 <h3 className="font-display text-base font-semibold leading-tight">{p.title}</h3>
-                <ArrowUpRight className="size-4 shrink-0 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
               </div>
 
               <div className="mt-2 flex items-center gap-3 text-xs text-muted-foreground">

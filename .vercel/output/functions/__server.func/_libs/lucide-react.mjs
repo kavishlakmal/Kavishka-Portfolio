@@ -75,16 +75,11 @@ const createLucideIcon = (iconName, iconNode) => {
   Component.displayName = toPascalCase(iconName);
   return Component;
 };
-const __iconNode$w = [
+const __iconNode$v = [
   ["path", { d: "M5 12h14", key: "1ays0h" }],
   ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
 ];
-const ArrowRight = createLucideIcon("arrow-right", __iconNode$w);
-const __iconNode$v = [
-  ["path", { d: "M7 7h10v10", key: "1tivn9" }],
-  ["path", { d: "M7 17 17 7", key: "1vkiza" }]
-];
-const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$v);
+const ArrowRight = createLucideIcon("arrow-right", __iconNode$v);
 const __iconNode$u = [
   [
     "path",
@@ -368,10 +363,9 @@ export {
   Award as j,
   ChartPie as k,
   Layers as l,
-  ArrowUpRight as m,
-  Calendar as n,
-  Check as o,
-  Copy as p,
-  LoaderCircle as q,
-  Send as r
+  Calendar as m,
+  Check as n,
+  Copy as o,
+  LoaderCircle as p,
+  Send as q
 };
